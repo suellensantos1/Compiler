@@ -1,6 +1,9 @@
 package Compiler.Lexical;
 
 import java.io.*;
+
+import Compiler.Lexical.Char.*;
+import Compiler.Lexical.Num.*;
 import Compiler.SymbolTable.SymbolTable;
 
 
@@ -155,7 +158,10 @@ public class Lexer {
                 readch();
             } while (Character.isDigit(ch)|| (ch == '.' && semDecimal));
             value += Decimal/10;
-            return new Num(value);
+            if(semDecimal){
+                return new IntConst((long) value);
+            }
+            return new FloatConst(value);
         }
 
         //Identificadores
@@ -164,7 +170,7 @@ public class Lexer {
             do {
                 sb.append(ch);
                 readch();
-            } while (Character.isLetterOrDigit(ch));
+            } while (Character.isLetterOrDigit(ch) || ch == '_');
             String s = sb.toString();
             Word w =  symbolTable.get(s);
             if (w != null) {
@@ -173,6 +179,37 @@ public class Lexer {
             w = new Word(s, Tag.ID);
             symbolTable.put(s, w);
             return w;
+        }
+
+        // Caracteres
+        if(ch=='\''){
+            readch();
+            char character = ch;
+            if(readch('\'')){
+                return new CharConst(character);
+            } 
+            String invalid = "'" + character + ch;
+            return new InvalidToken(invalid);
+        }
+
+        // Strings literais
+        if(ch=='{'){
+            StringBuffer sb = new StringBuffer();
+            readch();
+            while(true){
+                if(ch=='\n'){
+                    sb.append(ch);
+                    return new InvalidToken(sb.toString());
+                }
+                // End of File
+                if(ch==-1){
+                    return new Token(Tag.EOF);
+                }
+                sb.append(ch);
+                if(readch('}')) {
+                    return new StringConst(sb.toString());
+                };
+            }
         }
 
         // End of File
