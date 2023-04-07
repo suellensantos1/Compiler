@@ -32,5 +32,9 @@ public class Tag {
             
             //Outros tokens
             NUM = 300,
-            ID = 301;
+            ID = 301,
+            
+            //Fim de arquivo e token inválido
+            EOF= -1,
+            INVALID = -2; 
 }
