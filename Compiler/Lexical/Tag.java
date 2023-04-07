@@ -31,8 +31,9 @@ public class Tag {
             OR = 295,
             
             //Outros tokens
-            NUM = 300,
-            ID = 301,
+            INT_CONST = 300,
+            FLOAT_CONST = 301,
+            ID = 302,
             
             //Fim de arquivo e token inválido
             EOF= -1,
