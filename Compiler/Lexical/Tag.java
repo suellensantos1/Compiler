@@ -20,7 +20,6 @@ public class Tag {
             DO = 270,
             READ = 271,
             WRITE = 272,
-            
             //Operadores e pontuação
 
             EQ = 288,
@@ -34,6 +33,9 @@ public class Tag {
             INT_CONST = 300,
             FLOAT_CONST = 301,
             ID = 302,
+            CHAR_CONST = 303,
+            STRING_CONST = 304,
+
             
             //Fim de arquivo e token inválido
             EOF= -1,
