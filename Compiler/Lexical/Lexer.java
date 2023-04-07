@@ -56,7 +56,7 @@ public class Lexer {
     }
 
     public Token scan() throws IOException {
-        //Desconsidera delimitadores na entrada
+        //Desconsidera delimitadores e comentários na entrada
         for (;; readch()) {
             if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\b') {
                 continue;
@@ -65,20 +65,44 @@ public class Lexer {
             } else {
                 break;
             }
+        
+            //Procura por comentários
+            if(ch=='/'){
+                if(readch('*')){
+                    while(true){
+                        while(!readch('*')){
+                            if(ch=='\n'){
+                                line++;
+                            }
+                            // End of File
+                            if(ch==-1){
+                                return new Token(Tag.EOF);
+                            }
+                        }
+                        if(readch('/')) {
+                            break;
+                        };
+                    }
+                } else {
+                    return new Token('/');
+                }
+            }
+    
         }
+        
         switch (ch) {
             //Operadores
             case '&':
                 if (readch('&')) {
                     return Word.and;
                 } else {
-                    return new Token('&');
+                    return new InvalidToken("&");
                 }
             case '|':
                 if (readch('|')) {
                     return Word.or;
                 } else {
-                    return new Token('|');
+                    return new InvalidToken("|");
                 }
             case '=':
                 if (readch('=')) {
@@ -98,7 +122,20 @@ public class Lexer {
                 } else {
                     return new Token('>');
                 }
+            case '!':
+                if (readch('=')) {
+                    return Word.ne;
+                } else {
+                    return new Token('!');
+                }
         }
+
+        //Tokens de um único caractere
+        if( ch=='+'||ch=='-'||ch=='*'||ch=='.'||ch==','||
+            ch==';'||ch=='('||ch==')') {
+                return new Token(ch);
+            } 
+
         //Números
         if (Character.isDigit(ch)) {
             double value = 0;
@@ -120,6 +157,7 @@ public class Lexer {
             value += Decimal/10;
             return new Num(value);
         }
+
         //Identificadores
         if (Character.isLetter(ch)) {
             StringBuffer sb = new StringBuffer();
@@ -135,6 +173,11 @@ public class Lexer {
             w = new Word(s, Tag.ID);
             symbolTable.put(s, w);
             return w;
+        }
+
+        // End of File
+        if(ch==-1){
+            return new Token(Tag.EOF);
         }
 
         //Caracteres não especificados
