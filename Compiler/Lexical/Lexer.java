@@ -81,7 +81,7 @@ public class Lexer {
                                 line++;
                             }
                             // End of File
-                            if(ch==-1){
+                            if(ch==(char)-1){
                                 return new Token(Tag.EOF);
                             }
                         }
@@ -139,6 +139,7 @@ public class Lexer {
         //Tokens de um único caractere
         if( ch=='+'||ch=='-'||ch=='*'||ch=='.'||ch==','||
             ch==';'||ch=='('||ch==')') {
+                readch();
                 return new Token(ch);
             } 
 
@@ -205,7 +206,7 @@ public class Lexer {
                     return new InvalidToken(sb.toString());
                 }
                 // End of File
-                if(ch==-1){
+                if(ch==(char)-1){
                     return new Token(Tag.EOF);
                 }
                 sb.append(ch);
@@ -216,7 +217,7 @@ public class Lexer {
         }
 
         // End of File
-        if(ch==-1){
+        if(ch==(char)-1){
             return new Token(Tag.EOF);
         }
 
