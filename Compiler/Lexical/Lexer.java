@@ -1,18 +1,15 @@
+package Compiler.Lexical;
+
 import java.io.*;
-import java.util.*;
+import Compiler.SymbolTable.SymbolTable;
+
 
 public class Lexer {
 
     public static int line = 1; //contador de linhas
     private char ch = ' '; //caractere lido do arquivo
     private FileReader file;
-    private Hashtable words = new Hashtable();
-
-    /* Método para inserir palavras reservadas na HashTable */
-    private void reserve(Word w) {
-        words.put(w.getLexeme(), w); // lexema é a chave para entrada na
-        //HashTable
-    }
+    private SymbolTable symbolTable;
 
     /* Método construtor */
     public Lexer(String fileName) throws FileNotFoundException {
@@ -23,23 +20,24 @@ public class Lexer {
             throw e;
         }
         //Insere palavras reservadas na HashTable
-        reserve(new Word("program", Tag.PRG));
-        reserve(new Word("begin", Tag.BEG));
-        reserve(new Word("end", Tag.END));
-        reserve(new Word("is", Tag.IS));
-        reserve(new Word("type", Tag.TYPE));
-        reserve(new Word("int", Tag.INT));
-        reserve(new Word("float", Tag.FLOAT));
-        reserve(new Word("char", Tag.CHAR));
-        reserve(new Word("if", Tag.IF));
-        reserve(new Word("then", Tag.THEN));
-        reserve(new Word("else", Tag.ELSE));
-        reserve(new Word("repeat", Tag.REPEAT));
-        reserve(new Word("until", Tag.UNTIL));
-        reserve(new Word("while", Tag.WHILE));
-        reserve(new Word("do", Tag.DO));
-        reserve(new Word("read", Tag.READ));
-        reserve(new Word("write", Tag.WRITE));
+        symbolTable = new SymbolTable();
+        symbolTable.reserve(new Word("program", Tag.PRG));
+        symbolTable.reserve(new Word("begin", Tag.BEG));
+        symbolTable.reserve(new Word("end", Tag.END));
+        symbolTable.reserve(new Word("is", Tag.IS));
+        symbolTable.reserve(new Word("type", Tag.TYPE));
+        symbolTable.reserve(new Word("int", Tag.INT));
+        symbolTable.reserve(new Word("float", Tag.FLOAT));
+        symbolTable.reserve(new Word("char", Tag.CHAR));
+        symbolTable.reserve(new Word("if", Tag.IF));
+        symbolTable.reserve(new Word("then", Tag.THEN));
+        symbolTable.reserve(new Word("else", Tag.ELSE));
+        symbolTable.reserve(new Word("repeat", Tag.REPEAT));
+        symbolTable.reserve(new Word("until", Tag.UNTIL));
+        symbolTable.reserve(new Word("while", Tag.WHILE));
+        symbolTable.reserve(new Word("do", Tag.DO));
+        symbolTable.reserve(new Word("read", Tag.READ));
+        symbolTable.reserve(new Word("write", Tag.WRITE));
     }
 
     /*Lê o próximo caractere do arquivo*/
@@ -130,12 +128,12 @@ public class Lexer {
                 readch();
             } while (Character.isLetterOrDigit(ch));
             String s = sb.toString();
-            Word w = (Word) words.get(s);
+            Word w =  symbolTable.get(s);
             if (w != null) {
                 return w; //palavra já existe na HashTable
             }
             w = new Word(s, Tag.ID);
-            words.put(s, w);
+            symbolTable.put(s, w);
             return w;
         }
 

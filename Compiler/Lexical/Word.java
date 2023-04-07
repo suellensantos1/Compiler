@@ -1,3 +1,5 @@
+package Compiler.Lexical;
+
 public class Word extends Token {
 
     private String lexeme = "";

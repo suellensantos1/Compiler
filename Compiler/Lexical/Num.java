@@ -1,3 +1,5 @@
+package Compiler.Lexical;
+
 public class Num extends Token {
 
     public final double value;

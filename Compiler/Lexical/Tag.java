@@ -1,3 +1,5 @@
+package Compiler.Lexical;
+
 public class Tag {
 
     public final static int //Palavras reservadas
