@@ -1,4 +1,4 @@
-package Compiler.Lexical.Num;
+package Compiler.Lexical.Tokens.Num;
 
 import Compiler.Lexical.Tag;
 

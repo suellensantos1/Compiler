@@ -1,4 +1,6 @@
-package Compiler.Lexical;
+package Compiler.Lexical.Tokens;
+
+import Compiler.Lexical.Tag;
 
 public class Word extends Token {
 

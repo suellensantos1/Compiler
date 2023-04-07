@@ -1,6 +1,6 @@
-package Compiler.Lexical.Num;
+package Compiler.Lexical.Tokens.Num;
 
-import Compiler.Lexical.Token;
+import Compiler.Lexical.Tokens.Token;
 
 public abstract class Num extends Token {
 

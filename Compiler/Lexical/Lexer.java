@@ -2,8 +2,11 @@ package Compiler.Lexical;
 
 import java.io.*;
 
-import Compiler.Lexical.Char.*;
-import Compiler.Lexical.Num.*;
+import Compiler.Lexical.Tokens.InvalidToken;
+import Compiler.Lexical.Tokens.Token;
+import Compiler.Lexical.Tokens.Word;
+import Compiler.Lexical.Tokens.Char.*;
+import Compiler.Lexical.Tokens.Num.*;
 import Compiler.SymbolTable.SymbolTable;
 
 

@@ -1,6 +1,6 @@
-package Compiler.Lexical.Char;
+package Compiler.Lexical.Tokens.Char;
 
-import Compiler.Lexical.Token;
+import Compiler.Lexical.Tokens.Token;
 
 public class CharConst extends Token {
     public CharConst(char c) {

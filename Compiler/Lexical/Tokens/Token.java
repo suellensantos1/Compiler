@@ -1,4 +1,4 @@
-package Compiler.Lexical;
+package Compiler.Lexical.Tokens;
 
 public class Token {
 

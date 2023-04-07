@@ -1,7 +1,8 @@
 package Compiler.SymbolTable;
 
 import java.util.*;
-import Compiler.Lexical.Word;
+
+import Compiler.Lexical.Tokens.Word;
 
 public class SymbolTable {
 
