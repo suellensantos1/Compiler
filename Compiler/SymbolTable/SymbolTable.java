@@ -51,7 +51,7 @@ public class SymbolTable {
         System.out.println();
         System.out.println("Symbol Table");
         for(Entry<String, Word> entry: words.entrySet()){
-            System.out.println("\tChave:" + entry.getKey() + "\tLexeme: " 
+            System.out.println("\tChave: " + entry.getKey() + "\tLexeme: " 
                                 + entry.getValue().getLexeme() + "\tTag: "
                                 + Tag.getTagName(entry.getValue().getTag()));
         }
