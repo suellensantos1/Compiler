@@ -18,9 +18,8 @@ public class LexicalTest {
                 lexer = new Lexer(args[i]);
                 Token t = lexer.scan();
                 while(t.getTag()!=Tag.EOF){
+                    System.out.println("Lexema: " + t.toString()+"\t\tTag: " + Tag.getTagName(t.getTag()));
                     t = lexer.scan(); 
-                    System.out.println(t.toString());
-                    try{Thread.sleep(20);}catch(InterruptedException e){}
                 }
             } catch(FileNotFoundException e) {
                 System.out.println("File: " + args[i] + " not found.");
