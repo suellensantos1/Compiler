@@ -152,6 +152,10 @@ public class Lexer {
             do {
                 if(ch == '.'){
                     semDecimal = false;
+                    readch();
+                    if(!Character.isDigit(ch)){
+                        return new InvalidToken(Integer.toString((int)value)+'.');
+                    }
                 }
                 if(semDecimal = true){
                     value = 10 * value + Character.digit(ch, 10);
