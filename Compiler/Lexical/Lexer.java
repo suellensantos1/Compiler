@@ -18,32 +18,14 @@ public class Lexer {
     private SymbolTable symbolTable;
 
     /* Método construtor */
-    public Lexer(String fileName) throws FileNotFoundException {
+    public Lexer(String fileName, SymbolTable symbolTable) throws FileNotFoundException {
         try {
             file = new FileReader(fileName);
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
             throw e;
         }
-        //Insere palavras reservadas na HashTable
-        symbolTable = new SymbolTable();
-        symbolTable.reserve(new Word("program", Tag.PRG));
-        symbolTable.reserve(new Word("begin", Tag.BEG));
-        symbolTable.reserve(new Word("end", Tag.END));
-        symbolTable.reserve(new Word("is", Tag.IS));
-        symbolTable.reserve(new Word("type", Tag.TYPE));
-        symbolTable.reserve(new Word("int", Tag.INT));
-        symbolTable.reserve(new Word("float", Tag.FLOAT));
-        symbolTable.reserve(new Word("char", Tag.CHAR));
-        symbolTable.reserve(new Word("if", Tag.IF));
-        symbolTable.reserve(new Word("then", Tag.THEN));
-        symbolTable.reserve(new Word("else", Tag.ELSE));
-        symbolTable.reserve(new Word("repeat", Tag.REPEAT));
-        symbolTable.reserve(new Word("until", Tag.UNTIL));
-        symbolTable.reserve(new Word("while", Tag.WHILE));
-        symbolTable.reserve(new Word("do", Tag.DO));
-        symbolTable.reserve(new Word("read", Tag.READ));
-        symbolTable.reserve(new Word("write", Tag.WRITE));
+        this.symbolTable = symbolTable;
     }
 
     /*Lê o próximo caractere do arquivo*/
