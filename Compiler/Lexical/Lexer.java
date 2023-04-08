@@ -68,10 +68,7 @@ public class Lexer {
                 continue;
             } else if (ch == '\n') {
                 line++; //conta linhas
-            } else {
-                break;
-            }
-        
+            } else      
             //Procura por comentários
             if(ch=='/'){
                 if(readch('*')){
@@ -92,6 +89,8 @@ public class Lexer {
                 } else {
                     return new Token('/');
                 }
+            } else {
+                break;
             }
     
         }
@@ -139,8 +138,9 @@ public class Lexer {
         //Tokens de um único caractere
         if( ch=='+'||ch=='-'||ch=='*'||ch=='.'||ch==','||
             ch==';'||ch=='('||ch==')') {
+                char character = ch;
                 readch();
-                return new Token(ch);
+                return new Token(character);
             } 
 
         //Números
