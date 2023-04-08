@@ -77,6 +77,7 @@ public class Tag {
             tagNames.put(CHAR_CONST, "CHAR CONSTANT");
             tagNames.put(STRING_CONST, "STRING CONSTANT");
             tagNames.put(EOF, "END OF FILE");
+            tagNames.put(INVALID, "INVALID TOKEN");
             tagNames.put((int)'.', "DOT");
             tagNames.put((int)';', "SEMI COLON");
             tagNames.put((int)',', "COLON");
