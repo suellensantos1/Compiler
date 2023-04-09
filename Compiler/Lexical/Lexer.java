@@ -186,7 +186,7 @@ public class Lexer {
                 }
                 // End of File
                 if(ch==(char)-1){
-                    return new Token(Tag.EOF);
+                    return new InvalidToken(sb.toString());
                 }
                 sb.append(ch);
                 if(readch('}')) {
@@ -201,7 +201,7 @@ public class Lexer {
         }
 
         //Caracteres não especificados
-        Token t = new Token(ch);
+        Token t = new InvalidToken(""+ch);
         ch = ' ';
         return t;
     }
