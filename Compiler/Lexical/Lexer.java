@@ -127,31 +127,24 @@ public class Lexer {
 
         //Números
         if (Character.isDigit(ch)) {
-            double value = 0;
-            double Decimal = 0;
-            int NrDecimais = 10;
+            StringBuilder value = new StringBuilder();
             boolean semDecimal = true;
             do {
                 if(ch == '.'){
                     semDecimal = false;
+                    value.append(ch);
                     readch();
                     if(!Character.isDigit(ch)){
-                        return new InvalidToken(Integer.toString((int)value)+'.');
+                        return new InvalidToken(value.toString());
                     }
                 }
-                if(semDecimal = true){
-                    value = 10 * value + Character.digit(ch, 10);
-                }else{
-                    Decimal = Decimal/10 + Character.digit(ch, 10)/NrDecimais;
-                    NrDecimais *= 10;
-                }
+                value.append(ch);
                 readch();
             } while (Character.isDigit(ch)|| (ch == '.' && semDecimal));
-            value += Decimal/10;
             if(semDecimal){
-                return new IntConst((long) value);
+                return new IntConst(Long.parseLong(value.toString()));
             }
-            return new FloatConst(value);
+            return new FloatConst(Double.parseDouble(value.toString()));
         }
 
         //Identificadores
